@@ -1,4 +1,4 @@
-# 📡 Oscilloscope Signal Analysis (Embedded Systems)
+# 📡 Oscilloscope Signal Analysis 
 
 오실로스코프를 활용하여  
 **UART / Ultrasonic Sensor / DHT11 / I2C / LCD1602 / DMA** 등  
@@ -7,7 +7,7 @@
 
 단순히 코드가 “동작한다”에서 끝나는 것이 아니라,  
 **데이터시트 ↔ 코드 ↔ 실제 신호 파형**의 관계를 직접 확인하고  
-임베디드 시스템의 신뢰성을 검증하는 것을 목표로 하였습니다.
+디버깅을 할 수 있는 능력을 키우는것을 목표로 하였습니다.
 
 ---
 
@@ -17,7 +17,7 @@
 - **Tools**: Oscilloscope 
 - **Platform**: STM32CubeIDE (STM32411RE)
 - **Focus**:
-  - 프로토콜 타이밍 실측 분석
+  - 프로토콜 타이밍 분석
   - 센서 신호 해석 및 검증
   - 이론과 실제 동작 간 차이 이해
 
@@ -43,11 +43,12 @@
 - **LSB First** 전송 방식 검증
 - Baud Rate 기준 비트 주기 측정
 - Idle 상태(High) 확인
-
+- 문자 전송시 ASCII로 변환된것을 확인
+  
 #### ✔ Key Observations
 - Start Bit는 항상 **Low**
 - 데이터는 **LSB → MSB 순서로 전송**
-- Baudrate에 따라 비트 폭이 일정하게 유지됨
+- Baudrate에 따라 비트 폭이 결정됨
 
 #### 📷 Oscilloscope Capture
 <img width="759" height="235" alt="uart_scope" src="https://github.com/user-attachments/assets/806e9002-5c79-46a4-aa1c-c1854a01fcef" />
@@ -62,8 +63,7 @@
 - 거리 계산 공식 검증
 
 #### ✔ Distance Calculation
-
-예시:
+- 거리 = 속도 X 시간
 - Echo High Time = 300 µs  
 → Distance ≈ **5.1 cm**
 
@@ -114,8 +114,8 @@
   
 #### ✔ Key Observations
 - SCL High 상태에서 SDA 변화 → Start / Stop
-- 8-bit 데이터 전송 후 ACK Bit 존재
-- Master-Slave 구조 명확히 확인
+- 8bit 슬레이브 주소/ 8-bit 데이터 전송 후 ACK Bit 존재 확인
+- Master-Slave 구조 확인
 
 #### 📷 Oscilloscope Capture
 <img width="908" height="477" alt="i2c_lcd_scope_1" src="https://github.com/user-attachments/assets/e888be84-ea79-4160-a90e-bd33af32062b" />
@@ -151,12 +151,14 @@
 ## 📌 Conclusion
 
 본 학습을 통해  
-임베디드 시스템의 신뢰성은 **코드가 아닌 실제 신호 검증으로 완성됨**을 확인하였습니다.
+임베디드 개발자는 장치가 정상적으로 동작하지 않을떄
+코드에서만 오류를 확인 하는것이 아닌
+스코프를 통해 H/W디버깅 할 수 있는 능력이 중요하다는 것을 알았고 
+이 능력을 습득하여 좋은 경험이였다고 생각합니다.
 
-오실로스코프 기반 분석 경험은  
-펌웨어 및 임베디드 개발자로서의 **저수준 디버깅 역량을 크게 향상**시켰습니다.
 
 ---
+
 
 
 
